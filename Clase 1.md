@@ -98,8 +98,7 @@ class Walker {
 
 (la verdad no me funciono)
 
-
-
+pd: usar random seed la proxima vez
 
 
 
