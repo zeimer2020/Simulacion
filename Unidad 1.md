@@ -584,12 +584,330 @@ class Wave {
 
 <img width="358" height="665" alt="image" src="https://github.com/user-attachments/assets/a53e143f-9ff9-4b77-a718-7104b1628e7a" />
 
+ahora la version final que representa un circuito electrico en armonia, ya que sigue un patron, pero cuando el usuario coloca el mouse en el canvas, el circuito se sobrecarga y por eso se empiezan a genrar patrones amarillos aleatorios en lugar de seguir la ruta convencional
 
 
+``` Js
+
+let walker;
+let waves = [];
+let mouseInside = false;
+
+const BLUE = [90, 190, 255];
+const YELLOW = [255, 215, 80];
+
+function setup() {
+
+  let canvas = createCanvas(windowHeight * 9 / 16, windowHeight);
+
+  canvas.mouseOver(() => mouseInside = true);
+  canvas.mouseOut(() => mouseInside = false);
+
+  background(0);
+
+  walker = new Walker();
+
+}
+
+function draw() {
+
+  noStroke();
+  fill(0, 18);
+  rect(0, 0, width, height);
+
+  walker.step();
+  walker.show();
+
+  for (let i = waves.length - 1; i >= 0; i--) {
+
+    waves[i].update();
+    waves[i].show();
+
+    if (waves[i].dead()) {
+      waves.splice(i, 1);
+    }
+
+  }
+
+}
+
+class Walker {
+
+  constructor() {
+
+    this.x = width / 2;
+    this.y = height / 2;
+
+    this.bigStep = false;
+
+    this.direction = floor(random(4));
+
+    this.track = floor(random(12, 28));
+
+  }
+
+  chooseDirection() {
+
+  
+    if (this.direction === 0 || this.direction === 2) {
+
+      this.direction = random([1, 3]);
+
+    } else {
+
+      this.direction = random([0, 2]);
+
+    }
+
+    this.track = floor(random(10, 30));
+
+  }
+
+  levyJump() {
+
+    let jump = random(25, 70);
+
+    switch (this.direction) {
+
+      case 0:
+        this.x += jump;
+        break;
+
+      case 1:
+        this.y += jump;
+        break;
+
+      case 2:
+        this.x -= jump;
+        break;
+
+      case 3:
+        this.y -= jump;
+        break;
+
+    }
+
+  }
+
+  step() {
+
+    this.bigStep = random() < (mouseInside ? 0.16 : 0.02);
+
+    this.track--;
+
+    if (this.track <= 0) {
+
+      this.chooseDirection();
+
+    }
+
+    let step = abs(randomGaussian(2.5, 0.8));
+
+    if (mouseInside) {
+
+      step *= 1.4;
+
+    }
+
+    switch (this.direction) {
+
+      case 0:
+        this.x += step;
+        break;
+
+      case 1:
+        this.y += step;
+        break;
+
+      case 2:
+        this.x -= step;
+        break;
+
+      case 3:
+        this.y -= step;
+        break;
+
+    }
+
+    // Lévy Flight
+    if (this.bigStep) {
+
+      this.levyJump();
+
+    }
+
+    
+    this.x += random(-0.35, 0.35);
+    this.y += random(-0.35, 0.35);
+
+   
+    if (mouseInside) {
+
+      let dx = mouseX - this.x;
+      let dy = mouseY - this.y;
+
+      let d = sqrt(dx * dx + dy * dy);
+
+      if (d > 1) {
+
+        this.x += dx * 0.02;
+        this.y += dy * 0.02;
+
+      }
+
+     
+      if (random() < 0.04) {
+
+        let a = random(TWO_PI);
+        let r = random(25, 90);
+        this.x = mouseX + cos(a) * r;
+        this.y = mouseY + sin(a) * r;
+
+      }
+
+    }
+
+    this.x = constrain(this.x, 0, width);
+    this.y = constrain(this.y, 0, height);
+
+  }
+
+  show() {
+
+    let c = mouseInside ? YELLOW : BLUE;
+    if (this.bigStep) {
+
+      noStroke();
+
+      fill(c[0], c[1], c[2], 35);
+      circle(this.x, this.y, 18);
+      fill(c[0], c[1], c[2], 120);
+      circle(this.x, this.y, 8);
+      fill(255);
+      circle(this.x, this.y, 3);
+
+    } else {
+
+      stroke(c[0], c[1], c[2], 180);
+      strokeWeight(random(1, 2));
+      point(this.x, this.y);
+
+    }
+
+    if (mouseInside || random() < 0.18) {
+
+      waves.push(
+        new Wave(
+          this.x,
+          this.y,
+          this.bigStep
+        )
+      );
+
+    }
+
+  }
+
+}
+
+class Wave {
+
+  constructor(x, y, fast) {
+
+    this.x = x;
+    this.y = y;
+
+    this.fast = fast;
+
+    this.size = 2;
+
+    if (fast) {
+
+      this.maxSize = 20;
+      this.speed = 3.5;
+      this.alpha = 220;
+
+    } else {
+
+      this.maxSize = 32;
+      this.speed = 1.0;
+      this.alpha = 70;
+
+    }
+
+  }
+
+  update() {
+
+    this.size += this.speed;
+
+    if (this.fast) {
+      this.alpha -= 10;
+    } else {
+      this.alpha -= 2;
+    }
+
+  }
+
+  show() {
+
+    let c = mouseInside ? YELLOW : BLUE;
+
+    push();
+
+    translate(this.x, this.y);
+
+    noFill();
+
+    strokeWeight(this.fast ? 2 : 1);
+
+    stroke(c[0], c[1], c[2], this.alpha);
+
+ 
+    rectMode(CENTER);
+    square(0, 0, this.size * 2);
+    line(-this.size, 0, this.size, 0);
+    line(0, -this.size, 0, this.size);
+
+    if (this.fast) {
+
+      stroke(c[0], c[1], c[2], this.alpha * 0.45);
+      square(0, 0, this.size * 1.35);
+      line(
+        -this.size * 0.7,
+        -this.size * 0.7,
+         this.size * 0.7,
+         this.size * 0.7
+      );
+      line(
+        -this.size * 0.7,
+         this.size * 0.7,
+         this.size * 0.7,
+        -this.size * 0.7
+      );
+
+    }
+
+    pop();
+
+  }
+
+  dead() {
+    return (
+      this.size > this.maxSize ||
+      this.alpha <= 0
+    );
+
+  }
+
+}
 
 
+```
+Cuando esta azul es el circuito en armonia, moviendose por rutas organizadas
+<img width="400" height="675" alt="image" src="https://github.com/user-attachments/assets/10a90aed-c783-44d3-88ff-f34900699227" />
 
-
+<img width="388" height="632" alt="image" src="https://github.com/user-attachments/assets/7f28cbea-b3bb-481d-861f-3d142b262931" />
 
 
 
