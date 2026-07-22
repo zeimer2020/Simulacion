@@ -909,7 +909,9 @@ Cuando esta azul es el circuito en armonia, moviendose por rutas organizadas
 
 <img width="388" height="632" alt="image" src="https://github.com/user-attachments/assets/7f28cbea-b3bb-481d-861f-3d142b262931" />
 
-
+- El walker cambia de direccion y se mueve constantemente por el canvas, haciendo la caminata aleatoria
+- Se usan varias probabilidades como con random() < 0.16, random() < 0.02, random() < 0.04 y asi para decidir eventos como los saltos, aparición de ondas, teletransporte cerca del mouse, esta seria la distribucion de probabilidad
+- randomGaussian(2.5, 0.8) genera la longitud de la mayoría de los pasos, concentrándolos alrededor de una media con pocos valores extremos, haciendo la distribucion normal
 
 
 
