@@ -260,661 +260,611 @@ no se ve pero se esta moviendo mas rapido
 
 Actividad 7
 
-Mi idea es que en la pantalla hayan multiples puntos que salgan de manera automatica y que la interaccion del usuario sea colocar el mouse en el canvas, lo que generara un aumento de velocidad de la aparicion de los puntos  
+Mi idea es representar la torre de tesla, la que generaba energia
+<img width="277" height="372" alt="image" src="https://github.com/user-attachments/assets/66ea1d47-e5e7-4dac-be1f-2db64bd0a6cd" />
+(WardenClyffe tower)
 
-hice varias versiones, una pidiendo correcciones y ayudaspromteando con la IA y otra directamente prompteando con la idea que tenia originalmente
+en un principio generar energia comun y corriente pero cuando el mouse entre en el canvas se va a sobrecargar repetinamente, dandole un poco de interactividad al usuario 
 
-primera version
-``` js
-let walker;
-let mouseInside = false;
+normal 
+<img width="848" height="669" alt="image" src="https://github.com/user-attachments/assets/20087fff-552d-430d-a7f4-5b2b8598609a" />
 
-function setup() {
-  let canvas = createCanvas(windowHeight * 9 / 16, windowHeight);
-
-  canvas.mouseOver(() => mouseInside = true);
-  canvas.mouseOut(() => mouseInside = false);
-
-  walker = new Walker();
-  background(7, 20, 38);
-}
-
-function draw() {
-  walker.step();
-  walker.show();
-}
-
-class Walker {
-  constructor() {
-    this.x = width / 2;
-    this.y = height / 2;
-    this.bigStep = false;
-  }
-
-  show() {
-    if (this.bigStep) {
-      stroke(255, 92, 138);
-      strokeWeight(5);
-    } else {
-      stroke(84, 214, 255);
-      strokeWeight(2);
-    }
-
-    point(this.x, this.y);
-  }
-
-  step() {
-    
-    let ratio = mouseInside ? 1.10 : 0.01;
-
-    this.bigStep = random(1) < ratio;
-
-    let xstep;
-    let ystep;
-
-    if (this.bigStep) {
-      xstep = random(-100, 100);
-      ystep = random(-100, 100);
-    } else {
-      xstep = random(-1, 1);
-      ystep = random(-1, 1);
-    }
-
-    this.x += xstep;
-    this.y += ystep;
-
-    this.x = constrain(this.x, 0, width);
-    this.y = constrain(this.y, 0, height);
-  }
-}
-
-```
-
-
-<img width="463" height="769" alt="image" src="https://github.com/user-attachments/assets/65fd203b-38ba-4822-af89-689094a24786" />
-
-Mi idea aca era mas como que fueran particulas que al ser afectadas cambiarian de color y medio seguirian al mouse
-
-segunda version prompteada
+sobrecargada
+<img width="886" height="651" alt="image" src="https://github.com/user-attachments/assets/9dfe9b83-9fa5-4c4a-b4cd-fe3e3de3559f" />
 
 ``` Js
-let walker;
+let rays = [];
+let particles = [];
+
+let overload = 0;      
 let mouseInside = false;
-let waves = [];
+
+let towerTop;
 
 function setup() {
-  let canvas = createCanvas(windowHeight * 9 / 16, windowHeight);
 
-  canvas.mouseOver(() => mouseInside = true);
-  canvas.mouseOut(() => mouseInside = false);
+  let cnv = createCanvas(windowWidth, windowHeight);
 
-  background(0);
+  cnv.mouseOver(() => {
+    mouseInside = true;
+  });
 
-  walker = new Walker();
+  cnv.mouseOut(() => {
+    mouseInside = false;
+  });
+
+  towerTop = createVector(width / 2, height * 0.22);
+
+  strokeCap(ROUND);
+  angleMode(RADIANS);
 }
 
 function draw() {
 
-  // Estela
-  noStroke();
-  fill(0, 18);
-  rect(0, 0, width, height);
-
-  walker.step();
-  walker.show();
-
-  // Dibujar ondas
-  for (let i = waves.length - 1; i >= 0; i--) {
-    waves[i].update();
-    waves[i].show();
-
-    if (waves[i].dead()) {
-      waves.splice(i, 1);
-    }
+  if (mouseInside) {
+    overload = lerp(overload, 1, 0.08);
+  } else {
+    overload = lerp(overload, 0, 0.05);
   }
+
+  drawBackground();
+
+  drawTower();
+  updateParticles();
+  updateRays();
 }
 
-class Walker {
+function drawBackground() {
 
-  constructor() {
-    this.x = width / 2;
-    this.y = height / 2;
-    this.bigStep = false;
-  }
 
-  step() {
+  let glow = overload * 45;
 
-    let ratio = mouseInside ? 0.15 : 0.008;
-    this.bigStep = random() < ratio;
-
-    let xstep, ystep;
-
-    if (mouseInside) {
-
-      let dx = mouseX - this.x;
-      let dy = mouseY - this.y;
-
-      let d = dist(this.x, this.y, mouseX, mouseY);
-
-      if (d > 0) {
-        dx /= d;
-        dy /= d;
-      }
-
-      if (this.bigStep) {
-        xstep = random(-60, 60);
-        ystep = random(-60, 60);
-      } else {
-        xstep = random(-3, 3);
-        ystep = random(-3, 3);
-      }
-
-      xstep += dx * 2.2;
-      ystep += dy * 2.2;
-
-      if (d < 80) {
-        xstep += random(-2.5, 2.5);
-        ystep += random(-2.5, 2.5);
-      }
-
-    } else {
-
-      // Movimiento automático
-      xstep = random(-3, 3);
-      ystep = random(-3, 3);
-
-      if (frameCount % 60 === 0) {
-        xstep += random(-60, 60);
-        ystep += random(-60, 60);
-      }
-
-      if (random() < 0.03) {
-        xstep += random(-35, 35);
-        ystep += random(-35, 35);
-      }
-
-    }
-
-    this.x += xstep;
-    this.y += ystep;
-
-    this.x = constrain(this.x, 0, width);
-    this.y = constrain(this.y, 0, height);
-
-  }
-
-  show() {
-
-    if (this.bigStep) {
-
-      noStroke();
-
-      if (mouseInside) {
-
-        // Amarillo cálido
-        fill(255, 210, 80, 35);
-        circle(this.x, this.y, 18);
-
-        fill(255, 220, 100, 90);
-        circle(this.x, this.y, 10);
-
-        fill(255, 245, 210);
-        circle(this.x, this.y, 4);
-
-      } else {
-
-        // Azul eléctrico
-        fill(120, 220, 255, 30);
-        circle(this.x, this.y, 18);
-
-        fill(120, 220, 255, 90);
-        circle(this.x, this.y, 10);
-
-        fill(255);
-        circle(this.x, this.y, 4);
-
-      }
-
-    } else {
-
-      if (mouseInside) {
-        stroke(255, 215, 90, 180);
-      } else {
-        stroke(120, 220, 255, 180);
-      }
-
-      strokeWeight(random(1, 2));
-      point(this.x, this.y);
-
-    }
-
-    if (mouseInside || random() < 0.15) {
-      waves.push(new Wave(this.x, this.y, this.bigStep));
-    }
-
-  }
-
-}
-
-class Wave {
-
-  constructor(x, y, fast) {
-
-    this.x = x;
-    this.y = y;
-    this.fast = fast;
-
-    this.radius = 2;
-
-    if (fast) {
-      this.maxRadius = 18;
-      this.speed = 3.8;
-      this.alpha = 220;
-    } else {
-      this.maxRadius = 30;
-      this.speed = 0.7;
-      this.alpha = 55;
-    }
-
-  }
-
-  update() {
-
-    this.radius += this.speed;
-
-    if (this.fast) {
-      this.alpha -= 10;
-    } else {
-      this.alpha -= 2;
-    }
-
-  }
-
-  show() {
-
-    noFill();
-
-    if (this.fast) {
-
-      strokeWeight(2);
-
-      if (mouseInside) {
-
-        stroke(255, 215, 90, this.alpha);
-        circle(this.x, this.y, this.radius * 2);
-
-        stroke(255, 245, 200, this.alpha * 0.5);
-        circle(this.x, this.y, this.radius * 1.6);
-
-      } else {
-
-        stroke(140, 230, 255, this.alpha);
-        circle(this.x, this.y, this.radius * 2);
-
-        stroke(255, 255, 255, this.alpha * 0.5);
-        circle(this.x, this.y, this.radius * 1.6);
-
-      }
-
-    } else {
-
-      strokeWeight(1);
-
-      if (mouseInside) {
-        stroke(255, 210, 80, this.alpha);
-      } else {
-        stroke(80, 170, 255, this.alpha);
-      }
-
-      circle(this.x, this.y, this.radius * 2);
-
-    }
-
-  }
-
-  dead() {
-    return this.radius > this.maxRadius || this.alpha <= 0;
-  }
-
-}
-
-```
-
-<img width="418" height="681" alt="image" src="https://github.com/user-attachments/assets/7d04da5f-8af5-4f57-a4cf-b5ad095cb83a" />
-
-<img width="358" height="665" alt="image" src="https://github.com/user-attachments/assets/a53e143f-9ff9-4b77-a718-7104b1628e7a" />
-
-ahora la version final que representa un circuito electrico en armonia, ya que sigue un patron, pero cuando el usuario coloca el mouse en el canvas, el circuito se sobrecarga y por eso se empiezan a genrar patrones amarillos aleatorios en lugar de seguir la ruta convencional
-
-
-``` Js
-
-let walker;
-let waves = [];
-let mouseInside = false;
-
-const BLUE = [90, 190, 255];
-const YELLOW = [255, 215, 80];
-
-function setup() {
-
-  let canvas = createCanvas(windowHeight * 9 / 16, windowHeight);
-
-  canvas.mouseOver(() => mouseInside = true);
-  canvas.mouseOut(() => mouseInside = false);
-
-  background(0);
-
-  walker = new Walker();
-
-}
-
-function draw() {
+  background(
+    8 + glow * 0.25,
+    12 + glow * 0.20,
+    24 + glow * 0.35
+  );
 
   noStroke();
-  fill(0, 18);
-  rect(0, 0, width, height);
 
-  walker.step();
-  walker.show();
 
-  for (let i = waves.length - 1; i >= 0; i--) {
+  for (let i = 7; i > 0; i--) {
 
-    waves[i].update();
-    waves[i].show();
+    fill(
+      80,
+      140,
+      255,
+      4 + overload * 12
+    );
 
-    if (waves[i].dead()) {
-      waves.splice(i, 1);
-    }
-
+    circle(
+      towerTop.x,
+      towerTop.y,
+      i * 120 + overload * 90
+    );
   }
 
+ 
+
+  fill(20);
+
+  rect(
+    0,
+    height * 0.88,
+    width,
+    height * 0.12
+  );
 }
 
-class Walker {
+function updateRays() {
 
-  constructor() {
 
-    this.x = width / 2;
-    this.y = height / 2;
+  let probability = lerp(0.1, 1, overload);
 
-    this.bigStep = false;
+  if (random() < probability) {
 
-    this.direction = floor(random(4));
-
-    this.track = floor(random(12, 28));
-
+    rays.push(
+      new Lightning(
+        towerTop.x,
+        towerTop.y
+      )
+    );
   }
 
-  chooseDirection() {
+  for (let i = rays.length - 1; i >= 0; i--) {
 
-  
-    if (this.direction === 0 || this.direction === 2) {
+    rays[i].update();
+    rays[i].show();
 
-      this.direction = random([1, 3]);
-
-    } else {
-
-      this.direction = random([0, 2]);
-
+    if (rays[i].dead) {
+      rays.splice(i, 1);
     }
-
-    this.track = floor(random(10, 30));
-
   }
+}
 
-  levyJump() {
+function updateParticles() {
 
-    let jump = random(25, 70);
+  for (let i = particles.length - 1; i >= 0; i--) {
 
-    switch (this.direction) {
+    particles[i].update();
+    particles[i].show();
 
-      case 0:
-        this.x += jump;
-        break;
-
-      case 1:
-        this.y += jump;
-        break;
-
-      case 2:
-        this.x -= jump;
-        break;
-
-      case 3:
-        this.y -= jump;
-        break;
-
+    if (particles[i].dead) {
+      particles.splice(i, 1);
     }
-
   }
+}
 
-  step() {
+function mouseEntered() {
+  mouseInside = true;
+}
 
-    this.bigStep = random() < (mouseInside ? 0.16 : 0.02);
+function mouseExited() {
+  mouseInside = false;
+}
 
-    this.track--;
+function windowResized() {
 
-    if (this.track <= 0) {
+  resizeCanvas(windowWidth, windowHeight);
 
-      this.chooseDirection();
+  towerTop.set(
+    width / 2,
+    height * 0.22
+  );
+}
+function drawTower() {
 
-    }
+  let x = width / 2;
 
-    let step = abs(randomGaussian(2.5, 0.8));
+  let top = towerTop.y + 65;
+  let base = height * 0.90;
 
-    if (mouseInside) {
+  let frontW = width * 0.12;
+  let backW = frontW * 0.78;
+  let depth = width * 0.035;
 
-      step *= 1.4;
+  let shake =
+    map(noise(frameCount * 0.03), 0, 1, -2, 2) * overload;
 
-    }
+  push();
 
-    switch (this.direction) {
+  translate(shake, 0);
 
-      case 0:
-        this.x += step;
-        break;
 
-      case 1:
-        this.y += step;
-        break;
+  stroke(70);
+  strokeWeight(2);
 
-      case 2:
-        this.x -= step;
-        break;
+  line(x - backW + depth, base, x + depth, top);
+  line(x + backW + depth, base, x + depth, top);
 
-      case 3:
-        this.y -= step;
-        break;
 
-    }
+  stroke(180);
+  strokeWeight(2.5);
 
-    // Lévy Flight
-    if (this.bigStep) {
+  line(x - frontW, base, x, top);
+  line(x + frontW, base, x, top);
 
-      this.levyJump();
 
-    }
+  stroke(90);
 
-    
-    this.x += random(-0.35, 0.35);
-    this.y += random(-0.35, 0.35);
+  line(x - frontW, base, x - backW + depth, base);
+  line(x + frontW, base, x + backW + depth, base);
+  line(x, top, x + depth, top);
 
-   
-    if (mouseInside) {
 
-      let dx = mouseX - this.x;
-      let dy = mouseY - this.y;
+  let levels = 28;
 
-      let d = sqrt(dx * dx + dy * dy);
+  for (let i = 0; i <= levels; i++) {
 
-      if (d > 1) {
+    let t = i / levels;
 
-        this.x += dx * 0.02;
-        this.y += dy * 0.02;
+    let y = lerp(top, base, t);
 
-      }
+    let fw = lerp(0, frontW, t);
+    let bw = lerp(0, backW, t);
 
-     
-      if (random() < 0.04) {
+    stroke(170);
 
-        let a = random(TWO_PI);
-        let r = random(25, 90);
-        this.x = mouseX + cos(a) * r;
-        this.y = mouseY + sin(a) * r;
+    line(
+      x - fw,
+      y,
+      x + fw,
+      y
+    );
 
-      }
+    stroke(80);
 
-    }
+    line(
+      x - bw + depth,
+      y,
+      x + bw + depth,
+      y
+    );
 
-    this.x = constrain(this.x, 0, width);
-    this.y = constrain(this.y, 0, height);
+    stroke(110);
 
-  }
+    line(
+      x - fw,
+      y,
+      x - bw + depth,
+      y
+    );
 
-  show() {
+    line(
+      x + fw,
+      y,
+      x + bw + depth,
+      y
+    );
 
-    let c = mouseInside ? YELLOW : BLUE;
-    if (this.bigStep) {
 
-      noStroke();
+    if (i < levels) {
 
-      fill(c[0], c[1], c[2], 35);
-      circle(this.x, this.y, 18);
-      fill(c[0], c[1], c[2], 120);
-      circle(this.x, this.y, 8);
-      fill(255);
-      circle(this.x, this.y, 3);
+      let nt = (i + 1) / levels;
 
-    } else {
+      let ny = lerp(top, base, nt);
 
-      stroke(c[0], c[1], c[2], 180);
-      strokeWeight(random(1, 2));
-      point(this.x, this.y);
+      let nfw = lerp(0, frontW, nt);
 
-    }
+      stroke(145);
 
-    if (mouseInside || random() < 0.18) {
+      line(
+        x - fw,
+        y,
+        x + nfw,
+        ny
+      );
 
-      waves.push(
-        new Wave(
-          this.x,
-          this.y,
-          this.bigStep
-        )
+      line(
+        x + fw,
+        y,
+        x - nfw,
+        ny
       );
 
     }
 
   }
 
-}
 
-class Wave {
+  strokeWeight(3);
 
-  constructor(x, y, fast) {
+  stroke(190);
 
-    this.x = x;
-    this.y = y;
+  line(
+    x,
+    top,
+    x,
+    top - 55
+  );
 
-    this.fast = fast;
+  noStroke();
 
-    this.size = 2;
+  fill(40);
 
-    if (fast) {
+  ellipse(
+    x,
+    top - 42,
+    width * 0.23,
+    20
+  );
 
-      this.maxSize = 20;
-      this.speed = 3.5;
-      this.alpha = 220;
+  stroke(120);
 
-    } else {
+  strokeWeight(1);
 
-      this.maxSize = 32;
-      this.speed = 1.0;
-      this.alpha = 70;
+  for (let i = -10; i <= 10; i++) {
 
-    }
-
-  }
-
-  update() {
-
-    this.size += this.speed;
-
-    if (this.fast) {
-      this.alpha -= 10;
-    } else {
-      this.alpha -= 2;
-    }
+    line(
+      x + i * 5,
+      top - 42,
+      x + i * 2,
+      top - 62
+    );
 
   }
 
-  show() {
+  noFill();
 
-    let c = mouseInside ? YELLOW : BLUE;
+  strokeWeight(1.5);
+
+  stroke(175);
+
+  let domeY = top - 90;
+
+  for (let i = 0; i < 11; i++) {
+
+    let r = map(i, 0, 10, 18, width * 0.12);
+
+    ellipse(
+      x,
+      domeY,
+      r * 2,
+      r * 0.75
+    );
+
+  }
+
+  for (let a = -70; a <= 70; a += 20) {
 
     push();
 
-    translate(this.x, this.y);
+    translate(x, domeY);
 
-    noFill();
+    rotate(radians(a));
 
-    strokeWeight(this.fast ? 2 : 1);
-
-    stroke(c[0], c[1], c[2], this.alpha);
-
- 
-    rectMode(CENTER);
-    square(0, 0, this.size * 2);
-    line(-this.size, 0, this.size, 0);
-    line(0, -this.size, 0, this.size);
-
-    if (this.fast) {
-
-      stroke(c[0], c[1], c[2], this.alpha * 0.45);
-      square(0, 0, this.size * 1.35);
-      line(
-        -this.size * 0.7,
-        -this.size * 0.7,
-         this.size * 0.7,
-         this.size * 0.7
-      );
-      line(
-        -this.size * 0.7,
-         this.size * 0.7,
-         this.size * 0.7,
-        -this.size * 0.7
-      );
-
-    }
+    ellipse(
+      0,
+      0,
+      width * 0.03,
+      width * 0.22
+    );
 
     pop();
 
   }
 
-  dead() {
-    return (
-      this.size > this.maxSize ||
-      this.alpha <= 0
+  let glow = 30 + overload * 50;
+
+  noStroke();
+
+  for (let i = 6; i > 0; i--) {
+
+    fill(
+      120,
+      180,
+      255,
+      glow / i
+    );
+
+    circle(
+      x,
+      domeY,
+      10 + i * 10
+    );
+
+  }
+
+  fill(255);
+
+  circle(
+    x,
+    domeY,
+    12
+  );
+
+  pop();
+
+}
+
+// Sistema de rayos
+
+
+class Lightning {
+
+  constructor(x, y) {
+
+    this.points = [];
+    this.points.push(createVector(x, y));
+
+    this.angle = -PI / 2 + randomGaussian() * 0.08;
+
+    this.life = int(random(18, 35) + overload * 30);
+
+    this.alpha = 255;
+
+    this.dead = false;
+  }
+
+  update() {
+
+    if (this.life <= 0) {
+
+      this.alpha -= 18;
+
+      if (this.alpha <= 0) {
+        this.dead = true;
+      }
+
+      return;
+    }
+
+    let last = this.points[this.points.length - 1];
+
+    this.angle += randomGaussian() * (0.08 + overload * 0.18);
+
+    let step = random(6, 12);
+
+    if (random() < (0.03 + overload * 0.18)) {
+
+      step *= random(3, 6);
+
+    }
+
+    let next = createVector(
+
+      last.x + cos(this.angle) * step,
+
+      last.y + sin(this.angle) * step
+
+    );
+
+    this.points.push(next);
+
+    if (random() < overload * 0.12) {
+
+      particles.push(
+        new Spark(
+          next.x,
+          next.y
+        )
+      );
+
+    }
+
+    this.life--;
+  }
+
+  show() {
+
+    strokeWeight(1.8 + overload);
+
+    stroke(
+      150 + random(60),
+      210 + random(45),
+      255,
+      this.alpha
+    );
+
+    noFill();
+
+    beginShape();
+
+    for (let p of this.points) {
+
+      vertex(p.x, p.y);
+
+    }
+
+    endShape();
+
+
+
+    strokeWeight(5);
+
+    stroke(
+      180,
+      220,
+      255,
+      this.alpha * 0.12
+    );
+
+    beginShape();
+
+    for (let p of this.points) {
+
+      vertex(p.x, p.y);
+
+    }
+
+    endShape();
+
+  }
+
+}
+
+class Spark {
+
+  constructor(x, y) {
+
+    this.pos = createVector(x, y);
+
+    this.vel = p5.Vector.random2D();
+
+    this.vel.mult(random(0.5, 3));
+
+    this.life = random(15, 30);
+
+    this.dead = false;
+
+  }
+
+  update() {
+
+    this.pos.add(this.vel);
+
+    this.vel.mult(0.97);
+
+    this.life--;
+
+    if (this.life <= 0) {
+
+      this.dead = true;
+
+    }
+
+  }
+
+  show() {
+
+    noStroke();
+
+    fill(
+      180,
+      220,
+      255,
+      this.life * 8
+    );
+
+    circle(
+      this.pos.x,
+      this.pos.y,
+      3
+    );
+
+  }
+
+}
+function emitCorona() {
+
+  let amount = int(lerp(1, 8, overload));
+
+  for (let i = 0; i < amount; i++) {
+
+    let a = random(TWO_PI);
+
+    let r = random(8, 18);
+
+    particles.push(
+      new Spark(
+        towerTop.x + cos(a) * r,
+        towerTop.y - 39 + sin(a) * r
+      )
     );
 
   }
 
 }
 
+setInterval(() => {
 
+  emitCorona();
+
+}, 80);
+
+
+function drawFlash() {
+
+  if (overload < 0.55) return;
+
+  noStroke();
+
+  fill(
+    170,
+    210,
+    255,
+    overload * 18
+  );
+
+  rect(
+    0,
+    0,
+    width,
+    height
+  );
+
+}
+
+let oldDraw = draw;
+
+draw = function () {
+
+  oldDraw();
+
+  drawFlash();
+
+}
 ```
-Cuando esta azul es el circuito en armonia, moviendose por rutas organizadas
-<img width="400" height="675" alt="image" src="https://github.com/user-attachments/assets/10a90aed-c783-44d3-88ff-f34900699227" />
-
-<img width="388" height="632" alt="image" src="https://github.com/user-attachments/assets/7f28cbea-b3bb-481d-861f-3d142b262931" />
-
-- El walker cambia de direccion y se mueve constantemente por el canvas, haciendo la caminata aleatoria
-- Se usan varias probabilidades como con random() < 0.16, random() < 0.02, random() < 0.04 y asi para decidir eventos como los saltos, aparición de ondas, teletransporte cerca del mouse, esta seria la distribucion de probabilidad
-- randomGaussian(2.5, 0.8) genera la longitud de la mayoría de los pasos, concentrándolos alrededor de una media con pocos valores extremos, haciendo la distribucion normal
-
-
-
 
 
 
