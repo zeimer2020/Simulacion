@@ -265,7 +265,7 @@ Mi idea es representar la torre de tesla, la que generaba energia
 (WardenClyffe tower)
 
 en un principio generar energia comun y corriente pero cuando el mouse entre en el canvas se va a sobrecargar repetinamente, dandole un poco de interactividad al usuario 
-
+ya con eso dicho, me ayude mucho con la IA para poder dibujar la torre y generar las particulas con mas fuerza
 normal 
 <img width="848" height="669" alt="image" src="https://github.com/user-attachments/assets/20087fff-552d-430d-a7f4-5b2b8598609a" />
 
@@ -866,10 +866,18 @@ draw = function () {
 }
 ```
 
+Encargo completo: interpreto los cinco momentos dentro de un mismo sistema visual si logre interpretarlo, ya que las particulas se mueven de multiples maneras pero si se ira de cerca logra verse varias con comportamientos especificos, asi como con tendencias precisas
+
+Simulación con intención: utilizo al menos tres conceptos de la unidad para comunicar las ideas del encargo.	 sip, se ven, pincipalmente levy flight, distribucion normal y caminata aleatoria
+
+Interacción significativa: la interacción modifica el comportamiento o las probabilidades del sistema, que también funciona sin intervención. sip, ala cercar el mouse se nota el cambio de tendencia y rango de aparicion
+
+Prototipo funcional: la experiencia puede ejecutarse y recorrerse completa sin errores que impidan comprenderla.	 sip
+
+Proceso documentado: la bitácora evidencia avances, decisiones, dificultades, soluciones, uso de IA y enlace al prototipo.	 tambien se evidencia
 
 
-
-
+4.5
 
 
 
