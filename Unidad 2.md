@@ -25,7 +25,7 @@ En un principio creo que debería ser el tiempo, pero la interacción podría ha
 
 ### Reglas: ¿Cómo cambia el estado de un frame al siguiente?
 
-Las partículas irán cambiando de comportamiento posiblemente formando figuras debido a la repulsión y persecución por las "barreras" de particulas
+Las partículas irán cambiando de comportamiento posiblemente formando figuras debido a la repulsión y persecución por las "barreras" de partículas
 
 ### Invariantes: ¿Qué debe permanecer para conservar la identidad del sistema?
 
@@ -41,5 +41,74 @@ al enfrentarse a la barrera
 Yo pensaría que el efecto de caos es el resultado significativo, y el accidente interesante seria que el sistema nunca entre en caos, que se mantenga 
 organizado y que no se formen las formas aleatorias que tengo en mente
 
+(al final cambie de idea)
+
 ### Actividad 5
+
+
+Quiero explorar tensión entre caos y orden
+
+esperaría que se manifieste como un sistema que se mantiene en armonía hasta que una interrupción de la paz llega y desarma todo el sistema hasta que se vuelva a armar,  y así sucesivamente
+
+habrán partículas verdes que serán las partículas disruptivas, partículas celestes, azules oscuro y moradas que formaran una especie de moléculas
+
+este es uno de los "ecosistemas que se forma por las partículas
+
+<img width="113" height="143" alt="image" src="https://github.com/user-attachments/assets/5667742a-b7c5-4242-9d77-0b83d58d0b6f" />
+
+todas las particulas que estaban en un orden se desmantelan apenas una particula verde se les aproxima
+
+
+<img width="306" height="252" alt="image" src="https://github.com/user-attachments/assets/22792d95-bbea-40c8-a5db-aa732e27c3de" />
+
+
+aca el sistema en pleno caos
+
+
+<img width="587" height="717" alt="image" src="https://github.com/user-attachments/assets/82580ab6-08eb-43b3-9c11-2815581c77a6" />
+
+
+Tipos de partículas.
+
+
+Cantidad de partículas de cada tipo.
+
+
+Matriz de atracción, repulsión o indiferencia.
+
+
+Intensidad y alcance de cada relación.
+
+
+Distancias de interacción.
+Fricción y velocidad máxima.
+
+
+Distribución inicial.
+
+
+Parámetros constantes y variables.
+
+
+Apariencia e interacción, cuando existan.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
