@@ -77,7 +77,7 @@ sistema descartado
 <img width="919" height="736" alt="image" src="https://github.com/user-attachments/assets/86d323df-9c06-471c-aa1b-d7f2dcdc10dc" />
 
 
-link al proyecto
+### link al proyecto
 
 https://editor.p5js.org/zeimer2020/sketches/9n4dqIhHY
 
@@ -148,7 +148,7 @@ Total	100%	                                                                     
 
 [Actividad4](#Actividad4)
 [Actividad5](#Actividad5)
-[Linkalproyecto](Linkalproyecto)
+[Linkalproyecto](#Linkalproyecto)
 
 
 
