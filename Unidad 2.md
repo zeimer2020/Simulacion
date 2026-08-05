@@ -68,40 +68,84 @@ aca el sistema en pleno caos
 <img width="587" height="717" alt="image" src="https://github.com/user-attachments/assets/82580ab6-08eb-43b3-9c11-2815581c77a6" />
 
 
-Tipos de partículas.
+al final decidi cambiarlo para que fuera mas caotico
+<img width="445" height="354" alt="image" src="https://github.com/user-attachments/assets/71035838-d869-4b31-9680-fe38395ac1b1" />
+
+<img width="311" height="269" alt="image" src="https://github.com/user-attachments/assets/728dfb19-9616-449f-bb58-72f153dce74c" />
+
+sistema descartado
+<img width="919" height="736" alt="image" src="https://github.com/user-attachments/assets/86d323df-9c06-471c-aa1b-d7f2dcdc10dc" />
 
 
-Cantidad de partículas de cada tipo.
+link al proyecto
+
+https://editor.p5js.org/zeimer2020/sketches/9n4dqIhHY
+
+### Tipos de partículas.
+
+Azul oscuro, Azul celeste, amarilla, morada y verde
+
+### Cantidad de partículas de cada tipo.
+
+44 azules oscuras, 64 celestes, 32 amarillas, 42 moradas y 11 verdes
+
+### Matriz de atracción, repulsión o indiferencia.
+
+<img width="198" height="200" alt="image" src="https://github.com/user-attachments/assets/38a592a2-ec35-4af1-99a6-bd9d357527d8" />
 
 
-Matriz de atracción, repulsión o indiferencia.
+### Intensidad y alcance de cada relación.
 
+Las fuerzas van de −5.40 a +1.08, con alcances de 78–250 px; la repulsión verde recibe además un multiplicador de 1.55
 
-Intensidad y alcance de cada relación.
+### Distribución inicial.
 
+Azules y moradas rodean tres centros, las amarillas comienzan separadas y las verdes aparecen en los bordes
 
-Distancias de interacción.
-Fricción y velocidad máxima.
+### Parámetros constantes y variables.
 
+Son constantes la matriz, cantidades y límites; varían la semilla, posiciones, velocidades, aceleraciones y resultados emergentes
 
-Distribución inicial.
+### Apariencia e interacción, cuando existan.
 
+Son puntos luminosos con rastros y una matriz cromática; el clic altera el sistema y n lo reinicia.
 
-Parámetros constantes y variables.
+## Ficha pa explicar por si juanfer la pide
 
+Tensión: Caos y orden.
 
-Apariencia e interacción, cuando existan.
+Intención: Mostrar sistemas que se organizan, son destruidos por las verdes y luego intentan reconstruirse.
 
+Tipos y cantidades: 44 azules oscuras, 64 celestes, 32 amarillas, 42 moradas y 11 verdes.
 
+Reglas: A corta distancia todas se repelen; después actúan las atracciones o repulsiones de la matriz.
 
+Relación principal: Azules, celestes y moradas se atraen; las amarillas se agrupan; las verdes buscan los grupos y los dispersan.
 
+Matriz: Los valores positivos atraen, los negativos repelen y los cercanos a cero representan casi indiferencia.
 
+Asimetría: Las verdes son atraídas por los grupos, pero los grupos reciben una repulsión verde mucho mayor.
 
+Parámetros: Alcances de 78–250 px, BETA = 0.30, velocidad verde máxima 9.40 y multiplicador de repulsión 1.55.
 
+Justificación: Las fuerzas moderadas construyen orden; la velocidad y repulsión verde producen interrupciones visibles.
 
+Invariantes: Cantidades, colores, matriz, alcances, fricción y reglas de interacción.
 
+Variables: Semilla, posiciones, velocidades, formas de los cúmulos y momento de cada ruptura.
 
+Interacción: El clic altera el sistema y la tecla N genera una nueva ejecución.
 
+## El caos siempre interfiere en el orden
+--                                                                                        valoración            aporte
+La intención es clara y perceptible en el comportamiento.	20%		                            100%                  20  
+Los tipos, cantidades, matriz y parámetros están justificados desde la intención.	25%		    100%                  25
+Comprendo y puedo modificar el funcionamiento técnico del sistema.	20%		                  75%                   15
+El sistema produce variaciones con una identidad reconocible.	15%		                        100%                  15
+Experimenté, comparé, seleccioné y descarté con criterios claros.	10%		                    100%                  10
+Puedo distinguir y sustentar lo diseñado y lo emergente.	10%		                            100%                  10
+Total	100%	                                                                                95%                   4.7
+                               
 
 
 
