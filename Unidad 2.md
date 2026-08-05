@@ -3,7 +3,7 @@
 ## Actividad 4 
 
 ### ¿Qué quiero comunicar o hacer sentir, y qué sistema de relaciones puede materializarlo?
-
+s
 Principalmente quiero transmitir naturaleza, caos y algún tipo de desorden ordenado si es que eso tiene sentido 
 
 ### Intención: ¿Qué transformación, sensación, tensión o idea debe experimentar quien observa?
