@@ -128,7 +128,7 @@ Asimetría: Las verdes son atraídas por los grupos, pero los grupos reciben una
 
 Parámetros: Alcances de 78–250 px, BETA = 0.30, velocidad verde máxima 9.40 y multiplicador de repulsión 1.55.
 
-Justificación: Las fuerzas moderadas construyen orden; la velocidad y repulsión verde producen interrupciones visibles.
+Justificación: Las fuerzas moderadas construyen orden, la velocidad y repulsión verde producen interrupciones visibles.
 
 Invariantes: Cantidades, colores, matriz, alcances, fricción y reglas de interacción.
 
