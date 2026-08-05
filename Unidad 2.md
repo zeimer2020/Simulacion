@@ -146,9 +146,9 @@ Experimenté, comparé, seleccioné y descarté con criterios claros.	10%		     
 Puedo distinguir y sustentar lo diseñado y lo emergente.	10%		                            100%                  10
 Total	100%	                                                                                95%                   4.7
 
-[Actividad4](#Actividad4)
-[Actividad5](#Actividad5)
-[Linkalproyecto](#Linkalproyecto)
+[Actividad4](##Actividad4)
+[Actividad5](##Actividad5)
+[Linkalproyecto](###Linkalproyecto)
 
 
 
