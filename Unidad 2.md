@@ -147,7 +147,7 @@ Puedo distinguir y sustentar lo diseñado y lo emergente.	10%		                 
 Total	100%	                                                                                95%                   4.7
 
 [Actividad4](##Actividad4)
-[Actividad5](##Actividad5)
+[Actividad5](###Actividad5)
 [Linkalproyecto](###Linkalproyecto)
 
 
