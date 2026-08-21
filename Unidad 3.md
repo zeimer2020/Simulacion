@@ -32,7 +32,31 @@ no me decidia por una forma entonces las agregue todas
 
 <img width="162" height="141" alt="image" src="https://github.com/user-attachments/assets/0fa08709-ca50-41be-ab7e-b2e86f1bedae" />
 
+yo busque varias opciones, como diferentes formas en las que podria manejar el instrumento, al final le pedi a la IA que unificara lo q habia hecho con todas las versiones, para tener varias opciones mientras lo intentaba sincronizar con la cancion
 
 
+https://zeimer2020.github.io/Particulas-3D/
 
+el link para la experiencia
+
+Autoevaluacion
+
+Trazabilidad y comprensión del sistema	25	Puedo señalar y explicar estado, fuerzas, integración, render y controles; además puedo ubicar qué partes produjo o modificó la IA. 100
+
+
+Verificación del algoritmo de fuerzas	25	Estudié en detalle el proyecto y aunque no comprenda toda la sintaxis, puedo identificar su arquitectura, sus partes, puedo aislar una fuerza central, formular una predicción, la ejecuté ya analicé, comparé el resultado, cambié deliberadamente un signo o parámetro y expliqué la diferencia.  50
+
+
+Diseño de fuerzas e intención	20	Las fuerzas y sus parámetros hacen perceptible una intención; el comportamiento surge de la dinámica y no de trayectorias previamente dibujadas. 100
+
+
+Instrumento, score e interpretación	15	El score conecta la escucha con decisiones; escogí pocos controles expresivos y puedo conducir el sistema en vivo sin que el audio lo controle automáticamente. 100
+
+
+Experimentación y criterio frente a la IA	10	Comparé alternativas, registré hallazgos y descartes, corregí propuestas de IA y puedo justificar por qué conservé la versión presentada. 100
+
+
+Entrega técnica y documentación	5	la URL pública abre; la bitácora permite verificar el proceso. 100
+
+Total: 4.3
 
