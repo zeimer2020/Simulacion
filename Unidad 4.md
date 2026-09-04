@@ -1,5 +1,11 @@
 # Unidad 4
 
+me inspire bastante en la musiquita de minecraft
+<img width="331" height="273" alt="image" src="https://github.com/user-attachments/assets/e55bd432-8b18-4845-bdc4-1db7082a79bb" />
+
+queria hacer una ciudad pero al final me decante por hacer una casita (se me daño la ciudad)
+
+
 ### Link a la experiencia
 
 https://zeimer2020.github.io/Musiquita-con-particulas-otra-vez/
