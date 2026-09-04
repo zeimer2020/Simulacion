@@ -2,6 +2,8 @@
 
 ### Link a la experiencia
 
+https://zeimer2020.github.io/Musiquita-con-particulas-otra-vez/
+
 Leí y verifiqué que mi proyecto cumple con los requisitos mínimos de la unidad: 25 puntos.
 
 - El proyecto incluye ocho agentes con identidades visuales y sonoras diferentes. Permite modificar K, la dispersión y las frecuencias individuales, aplicar perturbaciones y reconocer estados de desorden, organización parcial y estabilidad.
