@@ -5,6 +5,9 @@ me inspire bastante en la musiquita de minecraft
 
 queria hacer una ciudad pero al final me decante por hacer una casita (se me daño la ciudad)
 
+pero al final me acorde de este jueguito <img width="375" height="260" alt="image" src="https://github.com/user-attachments/assets/a2f71051-381e-4e45-b511-75126925e1c4" />
+
+y pense en esa perspectiva de camara para la casita
 
 ### Link a la experiencia
 
