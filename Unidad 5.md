@@ -5,6 +5,7 @@ Despues de ver el diseño base que tenia pense en varias opciones, primero me en
 Experiencia
 
 https://zeimer2020.github.io/Este-funcionara/
+<img width="1552" height="698" alt="image" src="https://github.com/user-attachments/assets/4ca12eea-75b9-44fe-ad94-510f25155727" />
 
 
 Cumplimiento del encargo: mi presentación interpreta el guion mediante una estructura dinámica y funciona en pantalla completa. 25
