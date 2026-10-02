@@ -5,3 +5,11 @@ Despues de ver el diseño base que tenia pense en varias opciones, primero me en
 Experiencia
 
 https://zeimer2020.github.io/Este-funcionara/
+
+
+Cumplimiento del encargo: mi presentación interpreta el guion mediante una estructura dinámica y funciona en pantalla completa. 25
+Relaciones estructurales: puedo explicar qué relaciones existen en mi sistema, qué significan y cómo organizan sus elementos. 25
+Comportamiento y significado: puedo relacionar los cambios de movimiento, estructura, densidad o composición con una intención comunicativa. 25
+Explicación y demostración: puedo presentar la propuesta funcionando, explicar mis decisiones y demostrar cómo el sistema construye sentido. 25
+
+Nota: 5
