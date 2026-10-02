@@ -5,6 +5,8 @@ Hace poco fui a un concierto, la cancion me pego mas que todas las demas, las vi
 
 https://zeimer2020.github.io/Mi_cancion_particulas/
 
+<img width="1658" height="838" alt="image" src="https://github.com/user-attachments/assets/9325aa3c-eb94-4a5d-aafb-fed037eccdde" />
+
 
 Cumplimiento del encargo: mi instrumento utiliza tecnología web, funciona en tiempo real y permite interpretar la pieza musical elegida. 25
 Comprensión y verificación: puedo explicar y defender cómo está construido el sistema, qué perciben los agentes y cómo calculan sus acciones. Puedo predecir y verificar los cambios al modificar un parámetro. 25
